@@ -65,7 +65,7 @@ function fetchInner(loc,name){
         var keys=Object.keys(snapshot.val());
         for(var i in keys){
             var divTemp=document.createElement('div');
-            divTemp.className='form-check';
+            divTemp.className='wrapper-class';
 
             var input=document.createElement('input');
             input.type='checkbox';
@@ -76,7 +76,7 @@ function fetchInner(loc,name){
 
             var label = document.createElement('label')
             label.htmlFor = keys[i];
-            label.className='form-check-label  check-text';
+            label.className='check-text';
             label.appendChild(document.createTextNode(keys[i]));
 
             divTemp.appendChild(input);

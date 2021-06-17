@@ -32,42 +32,65 @@ function validate(){
     var dateFull=document.getElementById('date').value;
     var passed=false;
 
-    if(!dateFull || dateFull==""){
+    var c=0;
+
+    var ele1=document.getElementsByName('group1');
+    var ele2=document.getElementsByName('group2');
+    var ele3=document.getElementsByName('group3');
+
+    if((!ele1[0].checked && !ele1[1].checked) || (!ele2[0].checked && !ele2[1].checked) || (!ele3[0].checked && !ele3[1].checked)){
+        alert('Select appropriate radio buttons')
+    }
+    
+    else if(!dateFull || dateFull==""){
         alert("Select a date")
     }
 
     else{
 
-        dateFull=document.getElementById('date').value.split('T');
-        var date=dateFull[0].split('-');
-        var time=dateFull[1].split(':');
+        if(ele1[0].checked)
+            c++;
+        if(ele2[0].checked)
+            c++;
+        if(ele3[0].checked)
+            c++;
 
-        selDate=moment().format(date[2]);
-        selMonth=moment().format(date[1]);
-        selYear=moment().format(date[0]);
-        selHour=moment().format(time[0])
-        selMins=moment().format(time[1]);
+        if(c>=2){
+            alert('It is advisable that you stay isolated.');
+            window.document.location='../html/index.html';
+        }
+        else{
+            dateFull=document.getElementById('date').value.split('T');
+            var date=dateFull[0].split('-');
+            var time=dateFull[1].split(':');
 
-        if(selHour>12)
-            actualHour=''+(12+parseInt(actualHour));
+            selDate=moment().format(date[2]);
+            selMonth=moment().format(date[1]);
+            selYear=moment().format(date[0]);
+            selHour=moment().format(time[0])
+            selMins=moment().format(time[1]);
 
-        if(selYear<actualYear)
-            alert("Select a future date and time");
-        
-        else if(selYear==actualYear && selMonth<actualMonth)
-            alert("Select a future date and time");
-        
-        else if(selYear==actualYear && selMonth==actualMonth && selDate<actualDate)
-            alert("Select a future date and time");
-        
-        else if(selYear==actualYear && selMonth==actualMonth && selDate==actualDate && selHour<actualHour)
-            alert("Select a future date and time");
+            if(selHour>12)
+                actualHour=''+(12+parseInt(actualHour));
 
-        else if(selYear==actualYear && selMonth==actualMonth && selDate==actualDate && selHour==actualHour && selMins<=actualMins)
-            alert("Select a future date and time");
+            if(selYear<actualYear)
+                alert("Select a future date and time");
         
-        else
-            passed=true;
+            else if(selYear==actualYear && selMonth<actualMonth)
+                alert("Select a future date and time");
+        
+            else if(selYear==actualYear && selMonth==actualMonth && selDate<actualDate)
+                alert("Select a future date and time");
+        
+            else if(selYear==actualYear && selMonth==actualMonth && selDate==actualDate && selHour<actualHour)
+                alert("Select a future date and time");
+
+            else if(selYear==actualYear && selMonth==actualMonth && selDate==actualDate && selHour==actualHour && selMins<=actualMins)
+                alert("Select a future date and time");
+        
+            else
+                passed=true;   
+        }
     }
 
     if(passed){
